@@ -21,6 +21,7 @@ axiosRetry(axiosInstance, {
   retryDelay: axiosRetry.exponentialDelay,
   retryCondition: e => axiosRetry.isNetworkOrIdempotentRequestError(e) || e.response.status === 429
 });
+
 const startDate = dayjs(START_DATE).startOf('day');
 const endDate = dayjs(END_DATE).endOf('day');
 const limit = RateLimit(100, { timeUnit: 60 * 1000, uniformDistribution: true }); // 100 requests per minute
@@ -114,6 +115,6 @@ const consentToCsvString = consent => {
 getConsents()
   .then(() => console.log('done'))
   .catch(err => {
-    console.log(err);
+    console.error(err);
     throw err;
   });

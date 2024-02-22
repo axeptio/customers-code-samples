@@ -21,5 +21,9 @@ Except it saves you lots of clicks, and consents are aggregated into a single CS
 3. Copy the `.env.sample` file to `.env`, and replace all values by yours (your organization's id, your access token, the start date and end date, YYYY-MM-DD format)
 
 ### Get the consents
-1. Run `npm run getConsents` and wait for `done` to be printed. Be patient, if you requested a large period and you have lots of consents, it can be be quite long.
+1. Run `npm run getConsents` and wait for `done` to be printed.
 2. The results will be stored in the `results` folder as a CSV file.
+
+### ⚠️ Warning ⌛
+
+Be patient: if you request on a large period and have lots of consents/projects, it can be quite long: for this route, our API has a rate limit of 100 requests/minute, and a maximum of 100 consents/request.
