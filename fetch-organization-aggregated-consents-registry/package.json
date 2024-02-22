@@ -1,11 +1,10 @@
 {
   "name": "fetch-organization-aggregated-consents-registry",
   "version": "1.0.0",
-  "description": "script to fetch all organization's projects consents registries",
+  "description": "script to fetch all organization's projects consents",
   "main": "index.js",
   "scripts": {
-    "getConsents": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "getConsents": "node index.js"
   },
   "engines": {
     "node": ">=18.19.0",
