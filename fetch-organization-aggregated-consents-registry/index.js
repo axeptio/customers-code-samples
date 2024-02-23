@@ -3,8 +3,12 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const axiosRetry = require('axios-retry').default;
-const dayjs = require('dayjs');
 const { RateLimit } = require('async-sema');
+const dayjs = require('dayjs');
+const duration = require('dayjs/plugin/duration');
+const relativeTime = require('dayjs/plugin/relativeTime');
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
 
 const { ORGANIZATION_ID, START_DATE, END_DATE, ACCESS_TOKEN } = process.env;
 
@@ -46,11 +50,12 @@ const getConsents = async () => {
   const csvWriteStream = fs.createWriteStream(csvFilePath, { flags: 'w' });
   csvWriteStream.write(headers.join(';') + '\n');
 
+  const start = dayjs();
   for (const projectId of publishedProjectIds) {
     await getConsentsByProjectId(projectId, csvWriteStream);
   }
   csvWriteStream.end();
-  console.log(`Consents written to ${csvFilePath}`);
+  console.log(`Consents written to ${csvFilePath} ${dayjs.duration(dayjs().diff(start)).humanize(true)}`);
 };
 
 const getPublishedProjectsIds = async () => {
